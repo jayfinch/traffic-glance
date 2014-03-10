@@ -1,0 +1,17 @@
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^www.(.+)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+AddType application/vnd.ms-fontobject eot
+AddType application/x-font-ttf ttf
+AddType application/x-font-opentype otf
+AddType application/x-font-woff woff
+AddType image/svg+xml svg
+
+AddEncoding gzip svgz
+
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/x-javascript
