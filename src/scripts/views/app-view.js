@@ -1,65 +1,46 @@
 define(function(require) {
-	var Backbone = require('backbone');
+  var Backbone = require('backbone');
+  var _ = require('lodash');
   var AppTemplate = require('../templates/app');
+  var ConfigModel = require('../models/config-model');
   var RouteModel = require('../models/route-model');
-	require('../libs/chart');
+  var RouteView = require('./route-view');
 
-	var AppView = Backbone.View.extend({
+  var AppView = Backbone.View.extend({
 
-		RED_CLR: '#e01513',
-		ORANGE_CLR: '#ff933a',
-		GREEN_CLR: '#79d448',
+    className: 'container',
 
-		initialize: function() {
-			var myModel = new RouteModel();
-			myModel.fetch();
+    initialize: function() {
+      this.configModel = new ConfigModel();
+      this.listenTo(this.configModel, 'change', this.onModelChange);
+    },
 
-			this.listenTo(myModel, 'change', this.onModelChange);
-		},
+    render: function() {
+      this.$el.html(AppTemplate.renderSync());
+      return this;
+    },
 
-		render: function() {
-			this.$el.html(AppTemplate.renderSync());
-		},
+    renderRoutes: function() {
+      var routes = this.configModel.routes();
 
-		onModelChange: function(model) {
-			// console.log('total: ' + model.getTravelDurationTotalWithTraffic());
-			var data = model.getTravelDurationByCongestion();
-			this.chartIt(data);
-		},
+      _.each(routes, function(route) {
+        var model = new RouteModel(route);
+        var view = new RouteView({
+          model: model
+        });
+        this.$('#routes').append(view.render().el);
+      });
+    },
 
-		chartIt: function(data) {
-			var colorizedData = [
-				{
-					value: data.high,
-					color: this.RED_CLR
-				},
-				{
-					value : data.medium,
-					color : this.ORANGE_CLR
-				},
-				{
-					value : data.low,
-					color : this.GREEN_CLR
-				}
-			];
+    bootstrap: function() {
+      this.configModel.fetch();
+    },
 
-			var options = {
-				animation: true,
-				animateRotate: false,
-				animateScale: true,
-				percentageInnerCutout: 45,
-				animationSteps: 40,
-				segmentStrokeWidth: 1
-			};
+    onModelChange: function() {
+      this.renderRoutes();
+    }
 
-			var canvasContext = this.$('canvas')[0].getContext('2d');
-			var myDoughnut = new Chart(canvasContext);
-			myDoughnut.Doughnut(colorizedData, options);
+  });
 
-
-		}
-
-	});
-
-	return AppView;
+  return AppView;
 });

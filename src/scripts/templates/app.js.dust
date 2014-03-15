@@ -1,4 +1,2 @@
-<div class="container">
-  <h1>Hello, World!</h1>
-  <canvas id="canvas" height="80" width="80"></canvas>
-</div>
+<h1>TrafficGlance</h1>
+<div id="routes">Loading...</div>

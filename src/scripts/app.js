@@ -4,7 +4,7 @@ define(function(require) {
 
   return function() {
     var appView = new AppView();
-    $('body').html(appView.$el);
-    appView.render();
+    $('body').prepend(appView.render().el);
+    appView.bootstrap();
   };
 });
