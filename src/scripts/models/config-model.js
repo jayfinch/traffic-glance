@@ -2,6 +2,7 @@ define(function(require) {
   var Backbone = require('backbone');
   var _ = require('lodash');
 
+  var instance;
   var ConfigModel = Backbone.Model.extend({
 
     url: function() {
@@ -63,6 +64,16 @@ define(function(require) {
     }
 
   });
+
+  ConfigModel.instance = function() {
+    if (!instance) {
+      instance = new ConfigModel();
+      return instance;
+    } else {
+      return instance;
+    }
+
+  };
 
   return ConfigModel;
 });

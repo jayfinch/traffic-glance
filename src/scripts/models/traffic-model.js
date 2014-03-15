@@ -1,11 +1,24 @@
 define(function(require) {
 	var Backbone = require('backbone');
 	var _ = require('lodash');
+	var ConfigModel = require('../models/config-model');
 
-	var TravelRouteModel = Backbone.Model.extend({
-		urlRoot: '/data/CA.json',
+	var TrafficModel = Backbone.Model.extend({
 
-		getTravelDurationByCongestion: function() {
+		initialize: function(options) {
+			this.coords = options.coords;
+		},
+
+		url: function() {
+			var string = 'http://dev.virtualearth.net/REST/V1/Routes/Driving?&';
+			_.each(this.coords, function(coord, index) {
+				string = string + coord.type + '.' + index + '=' + coord.coordLat + ',' + coord.coordLong + '&';
+			});
+			string = string + 'key=' + ConfigModel.instance().get('key');
+			return string;
+    },
+
+		travelDurationByCongestion: function() {
 			var itineraryItems = this.get('resourceSets')[0].resources[0].routeLegs[0].itineraryItems;
 			var total = 0;
 			var low = 0;
@@ -30,7 +43,7 @@ define(function(require) {
 								high = high + item.travelDuration;
 								break;
 							default:
-								// TODO: log error
+								// todo: log error
 								low = low + item.travelDuration;
 							}
 						}
@@ -47,15 +60,13 @@ define(function(require) {
 			});
 
 			return total;
-
-
 		},
 
-		getTravelDurationTotalWithTraffic: function() {
+		travelDurationTotal: function() {
 			return this.get('resourceSets')[0].resources[0].travelDuration;
 		}
 
 	});
 
-	return TravelRouteModel;
+	return TrafficModel;
 });

@@ -9,11 +9,16 @@ define(function(require) {
   var AppView = Backbone.View.extend({
 
     className: 'container',
+    childViews: [], // todo: move to app model
+    configModel: null,
 
     initialize: function() {
-      this.configModel = new ConfigModel();
+      // todo: specify distance units
+      this.configModel = ConfigModel.instance();
       this.listenTo(this.configModel, 'change', this.onModelChange);
     },
+
+    // Rendering
 
     render: function() {
       this.$el.html(AppTemplate.renderSync());
@@ -21,23 +26,30 @@ define(function(require) {
     },
 
     renderRoutes: function() {
+      var self = this;
       var routes = this.configModel.routes();
+      var routesDiv = this.$('#routes');
+      routesDiv.empty();
 
       _.each(routes, function(route) {
-        var model = new RouteModel(route);
-        var view = new RouteView({
-          model: model
+        var routeView = new RouteView({
+          model: new RouteModel(route)
         });
-        this.$('#routes').append(view.render().el);
+        self.childViews.push(routeView);
+        routesDiv.append(routeView.render().el);
       });
     },
 
-    bootstrap: function() {
-      this.configModel.fetch();
-    },
+    // Events
 
     onModelChange: function() {
       this.renderRoutes();
+    },
+
+    // Methods
+
+    bootstrap: function() {
+      this.configModel.fetch();
     }
 
   });

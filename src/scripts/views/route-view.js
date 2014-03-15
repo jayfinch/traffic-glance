@@ -1,33 +1,43 @@
 define(function(require) {
   var Backbone = require('backbone');
   var RouteTemplate = require('../templates/route');
-  var RouteModel = require('../models/route-model');
+  var TrafficModel = require('../models/traffic-model');
   require('../libs/chart');
 
-  var AppView = Backbone.View.extend({
+  var RouteView = Backbone.View.extend({
 
     RED_CLR: '#e01e1b',
     ORANGE_CLR: '#feaf01',
     GREEN_CLR: '#6ec43f',
+    trafficModel: null,
 
     initialize: function() {
-      var myModel = new RouteModel();
-
-      this.listenTo(myModel, 'change', this.onModelChange);
+      this.trafficModel = new TrafficModel({
+        coords: this.model.get('segments')
+      });
+      this.listenTo(this.model, 'change', this.render);
+      this.listenTo(this.trafficModel, 'change', this.onTrafficModelChange);
     },
+
+    events: {
+      'click .refresh': 'onClickRefresh'
+    },
+
+    // Rendering
 
     render: function() {
       this.$el.html(RouteTemplate.renderSync(this.model.toJSON()));
+
+      var congestionData = this.model.get('travelDurationByCongestion');
+
+      if(congestionData) {
+        this.renderPieChart(congestionData);
+      }
+
       return this;
     },
 
-    onModelChange: function(model) {
-      // console.log('total: ' + model.getTravelDurationTotalWithTraffic());
-      var data = model.getTravelDurationByCongestion();
-      this.chartIt(data);
-    },
-
-    chartIt: function(data) {
+    renderPieChart: function(data) {
       var colorizedData = [
         {
           value: data.high,
@@ -56,11 +66,34 @@ define(function(require) {
       var canvasContext = this.$('canvas')[0].getContext('2d');
       var myDoughnut = new Chart(canvasContext);
       myDoughnut.Doughnut(colorizedData, options);
+    },
 
+    // Events
 
+    onTrafficModelChange: function() {
+      this.model.set({
+        travelDurationTotal: this.trafficModel.travelDurationTotal(),
+        travelDurationByCongestion: this.trafficModel.travelDurationByCongestion()
+      });
+    },
+
+    // UI Events
+
+    onClickRefresh: function(event) {
+      event.preventDefault();
+      this.fetchTrafficData();
+    },
+
+    // Methods
+
+    fetchTrafficData: function() {
+      this.trafficModel.fetch({
+        dataType : 'jsonp',
+        jsonp: 'jsonp'
+      });
     }
 
   });
 
-  return AppView;
+  return RouteView;
 });

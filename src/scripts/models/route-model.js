@@ -3,7 +3,7 @@ define(function(require) {
 
 	var RouteModel = Backbone.Model.extend({
 		defaults: {
-			name: '---',
+			name: '',
 			url: '',
 			segments: []
 		}

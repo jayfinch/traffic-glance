@@ -2,7 +2,8 @@
   "globals": [
     "requirejs",
     "require",
-    "define"
+    "define",
+    "Chart"
   ],
   "strict": false
 }
