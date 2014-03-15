@@ -1,11 +1,18 @@
 <h2><a href="{url}" target="_blank">{name}</a></h2>
 
 <div class="row">
-  <div class="col-xs-3 chart"></div>
-  <div class="col-xs-9">
-    total: {travelDurationTotal}
+  <div class="col-xs-5 col-sm-4 chart"></div>
+  <div class="col-xs-4 col-sm-5 stats">
+    {#travelDurationStats}
+	    <div class="duration">
+				{#hours}
+					{hours}<span class="unit">hr</span>&nbsp;
+				{/hours}
+				{minutes}<span class="unit">min</span></div>
+	    <div class="distance">{distance} {distanceUnits}</div>
+    {:else}
+	    <div class="duration">—<span class="unit">min</span></div>
+	    <div class="distance">— {distanceUnits}</div>
+    {/travelDurationStats}
   </div>
 </div>
-
-
-

@@ -7,7 +7,8 @@ define(function(require) {
 
     RED_CLR: '#e01e1b',
     ORANGE_CLR: '#feaf01',
-    GREEN_CLR: '#6ec43f',
+    GREEN_CLR: '#45c43f',
+    LIGHTGREEN_CLR: '#aac42f',
 
     initialize: function() {
       this.listenTo(this.model, 'change', this.render);
@@ -38,6 +39,10 @@ define(function(require) {
         },
         {
           value : data.low,
+          color : this.LIGHTGREEN_CLR
+        },
+        {
+          value : data.none,
           color : this.GREEN_CLR
         }
       ];

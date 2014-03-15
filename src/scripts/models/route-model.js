@@ -5,7 +5,8 @@ define(function(require) {
 		defaults: {
 			name: '',
 			url: '',
-			segments: []
+			segments: [],
+			distanceUnits: 'mi'
 		}
 	});
 

@@ -18,7 +18,8 @@ define(function(require) {
     },
 
     events: {
-      'click .refresh': 'onClickRefresh'
+      'click .refresh': 'onClickRefresh',
+      'click canvas': 'onClickRefresh'
     },
 
     // Rendering
@@ -38,7 +39,7 @@ define(function(require) {
 
     onTrafficModelChange: function() {
       this.model.set({
-        travelDurationTotal: this.trafficModel.travelDurationTotal(),
+        travelDurationStats: this.trafficModel.travelDurationStats(),
         travelDurationByCongestion: this.trafficModel.travelDurationByCongestion()
       });
     },
@@ -47,6 +48,7 @@ define(function(require) {
 
     onClickRefresh: function(event) {
       event.preventDefault();
+      this.$('img').addClass('rotate');
       this.fetchTrafficData();
     },
 
