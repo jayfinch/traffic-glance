@@ -1,4 +1,11 @@
-<canvas height="80" width="80"></canvas><br>
-<a href="{url}" target="_blank">{name}</a><br>
-<a href="#" class="refresh">refresh</a><br>
-total: {travelDurationTotal}<br><br><br>
+<h2><a href="{url}" target="_blank">{name}</a></h2>
+
+<div class="row">
+  <div class="col-xs-3 chart"></div>
+  <div class="col-xs-9">
+    total: {travelDurationTotal}
+  </div>
+</div>
+
+
+

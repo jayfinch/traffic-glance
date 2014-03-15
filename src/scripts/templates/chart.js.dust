@@ -1,0 +1,5 @@
+{?travelDurationByCongestion}
+	<canvas height="200" width="200" class="img-responsive">
+{:else}
+	<a href="#" class="refresh">refresh</a>
+{/travelDurationByCongestion}

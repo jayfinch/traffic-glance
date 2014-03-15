@@ -8,7 +8,6 @@ define(function(require) {
 
   var AppView = Backbone.View.extend({
 
-    className: 'container',
     childViews: [], // todo: move to app model
     configModel: null,
 

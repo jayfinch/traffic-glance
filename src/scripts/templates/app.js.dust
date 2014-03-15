@@ -1,2 +1,4 @@
-<h1>TrafficGlance</h1>
-<div id="routes">Loading...</div>
+<div class="toolbar">TrafficGlance</div>
+<div class="container">
+  <div id="routes" class="row">Loading...</div>
+</div>

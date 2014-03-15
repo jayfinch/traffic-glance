@@ -1,6 +1,78 @@
 @import (less)  "libs/bootstrap.css";
 
 body {
-	background: #3f474f;
-	color: #fff;
+  background: #3f474f;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.container {
+  width: auto;
+  max-width: 1200px;
+  margin-top: 45px;
+  padding: 0 15px;
+
+  @media (min-width: 768px) {
+    padding: 0 30px;
+  }
+}
+
+.toolbar {
+  height: 45px;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 1;
+  background: #32393f;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.route {
+
+  h2 {
+    border-bottom: 1px solid #32393f;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .refresh {
+    border-radius: 10px;
+    height: 100px;
+    display: block;
+    background: yellow;
+  }
+
+  canvas {
+    width: 100% !important; // force Chart.js to be responsive
+    height: auto !important;
+  }
+
+  margin-bottom: 15px;
+}
+
+// break every 2 items
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .route {
+    float: left;
+  }
+  .route:nth-child(2n+1) {
+    clear: left;
+  }
+}
+
+// break every 3 items
+
+@media (min-width: 992px) {
+  .route {
+    float: left;
+  }
+  .route:nth-child(3n+1) {
+    clear: left;
+  }
 }
