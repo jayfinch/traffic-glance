@@ -6,7 +6,7 @@
     {#travelDurationStats}
 	    <div class="duration">
 				{#hours}
-					<span class="nobreak">{hours}<span class="unit">&nbsp;hr&nbsp;&nbsp;</span></span>
+					<span class="nobreak">{hours}<span class="unit">&nbsp;hr&nbsp;&nbsp;</span></span><span><!--space--></span>
 				{/hours}
 				<span class="nobreak">{minutes}<span class="unit">&nbsp;min</span></span>
 			</div>

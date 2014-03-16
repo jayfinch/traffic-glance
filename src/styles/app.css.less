@@ -1,10 +1,11 @@
-@import (less)  "libs/bootstrap.css";
+@import (less) "libs/bootstrap.css";
+@import  "animation.less";
 
 // vars
+@light-gray: #b2b5b8;
 @medium-gray: #3f474f;
 @dark-gray: #32393f;
-@toolbar-height: 60px;
-@regular-text: Helvetica, Arial, sans-serif;
+@toolbar-height: 50px;
 @thin-text: HelveticaNeue-Thin, Helvetica, Arial, sans-serif;
 @thinnest-text: HelveticaNeue-UltraLight, Helvetica, Arial, sans-serif;
 
@@ -27,15 +28,18 @@ body {
   }
 }
 
+// credit row
+
 .credit {
   text-align: right;
   font-size: 12px;
-  padding-bottom: 15px;
-  padding-top: 30px;
+  border-top: 1px solid #32393f;
+  margin: 30px 0 0 0;
+  padding-top: 15px;
+  padding-bottom: 30px;
 
   a {
-    color: #fff;
-    opacity: .5;
+    color: @light-gray;
   }
 }
 
@@ -50,11 +54,11 @@ body {
   z-index: 1;
   background: #32393f;
   text-align: center;
-  font-family: @thin-text;
-  font-size: 25px;
 
-  .name {
-    padding-top: 13px;
+  .site-name {
+    padding-top: 11px;
+    font-family: @thin-text;
+    font-size: 20px;
   }
 
   img {
@@ -75,7 +79,7 @@ body {
     border-bottom: 1px solid #32393f;
     padding-bottom: 10px;
     margin-bottom: 15px;
-    font-size: 16px;
+    font-size: 18px;
 
     a {
       color: #fff;
@@ -85,18 +89,23 @@ body {
   // stats
 
   .stats {
-    font-size: 16px;
-    font-family: @thinnest-text;
-    line-height: 1.1;
     padding-top: 10px;
   }
-  .duration { font-size: 45px; }
+
+  .duration {
+    font-size: 45px;
+    line-height: 1.1;
+    font-family: @thinnest-text;
+  }
+
   .distance, .unit {
     font-size: 18px;
+    line-height: 1.1;
     font-family: @thin-text;
-    opacity: .6;
+    color: @light-gray;
     text-transform: uppercase;
   }
+
   .nobreak {
     white-space: nowrap;
   }
@@ -112,45 +121,8 @@ body {
   }
 
   img {
-    width: 94%;
+    width: 100%;
     height: auto ;
-  }
-
-
-  img.rotate {
-    -webkit-animation-name: spin;
-    -webkit-animation-duration: 2000ms;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-    -moz-animation-name: spin;
-    -moz-animation-duration: 2000ms;
-    -moz-animation-iteration-count: infinite;
-    -moz-animation-timing-function: linear;
-    -ms-animation-name: spin;
-    -ms-animation-duration: 2000ms;
-    -ms-animation-iteration-count: infinite;
-    -ms-animation-timing-function: linear;
-
-    animation-name: spin;
-    animation-duration: 2000ms;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-  }
-  @-ms-keyframes spin {
-    from { -ms-transform: rotate(0deg); }
-    to { -ms-transform: rotate(360deg); }
-  }
-  @-moz-keyframes spin {
-    from { -moz-transform: rotate(0deg); }
-    to { -moz-transform: rotate(360deg); }
-  }
-  @-webkit-keyframes spin {
-    from { -webkit-transform: rotate(0deg); }
-    to { -webkit-transform: rotate(360deg); }
-  }
-  @keyframes spin {
-    from { transform:rotate(0deg); }
-    to { transform:rotate(360deg); }
   }
 }
 
