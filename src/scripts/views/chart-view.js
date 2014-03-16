@@ -53,7 +53,7 @@ define(function(require) {
         animateScale: true,
         percentageInnerCutout: 45,
         animationSteps: 40,
-        segmentStrokeWidth: 4,
+        segmentStrokeWidth: 2,
         segmentStrokeColor: '#3f474f'
       };
 
