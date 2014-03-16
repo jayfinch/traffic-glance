@@ -11,7 +11,7 @@
 body {
   background: @medium-gray;
   color: #fff;
-  font-family: @regular-text;
+  font-family: @thin-text;
   font-size: 16px;
   line-height: 1.5;
 }
@@ -19,11 +19,23 @@ body {
 .container {
   width: auto;
   max-width: 1200px;
-  margin-top: @toolbar-height + 15px;;
+  margin-top: @toolbar-height + 30px;;
   padding: 0 15px;
 
   @media (min-width: 768px) {
     padding: 0 30px;
+  }
+}
+
+.credit {
+  text-align: right;
+  font-size: 12px;
+  padding-bottom: 15px;
+  padding-top: 30px;
+
+  a {
+    color: #fff;
+    opacity: .5;
   }
 }
 
@@ -59,12 +71,11 @@ body {
 .route {
   margin-bottom: 30px;
 
-  h2 {
+  .name {
     border-bottom: 1px solid #32393f;
     padding-bottom: 10px;
     margin-bottom: 15px;
     font-size: 16px;
-    font-weight: bold;
 
     a {
       color: #fff;
@@ -81,8 +92,13 @@ body {
   }
   .duration { font-size: 45px; }
   .distance, .unit {
-    font-size: 20px;
+    font-size: 18px;
     font-family: @thin-text;
+    opacity: .6;
+    text-transform: uppercase;
+  }
+  .nobreak {
+    white-space: nowrap;
   }
 
   // chart

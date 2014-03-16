@@ -1,4 +1,4 @@
-<h2><a href="{url}" target="_blank">{name}</a></h2>
+<div class="name"><a href="{url}" target="_blank">{name}</a></div>
 
 <div class="row">
   <div class="col-xs-5 col-sm-4 chart"></div>
@@ -6,13 +6,14 @@
     {#travelDurationStats}
 	    <div class="duration">
 				{#hours}
-					{hours}<span class="unit">hr</span>&nbsp;
+					<span class="nobreak">{hours}<span class="unit">&nbsp;hr&nbsp;&nbsp;</span></span>
 				{/hours}
-				{minutes}<span class="unit">min</span></div>
-	    <div class="distance">{distance} {units}</div>
+				<span class="nobreak">{minutes}<span class="unit">&nbsp;min</span></span>
+			</div>
+	    <div class="distance"><span class="nobreak">{distance} {units}</span></div>
     {:else}
-	    <div class="duration">—<span class="unit">min</span></div>
-	    <div class="distance">— {units}</div>
+	    <div class="duration"><span class="nobreak">—<span class="unit">&nbsp;min</span></span></div>
+	    <div class="distance"><span class="nobreak">—&nbsp;{units}</span></div>
     {/travelDurationStats}
   </div>
 </div>

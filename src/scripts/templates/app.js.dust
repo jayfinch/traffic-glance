@@ -3,5 +3,8 @@
   <div class="name">TrafficGlance</div>
 </div>
 <div class="container">
-  <div id="routes" class="row">Loading...</div>
+  <div class="row" id="routes">Loading...</div>
+  <div class="row credit">
+  	<div class="col-xs-12"><a href="#">Powered by Bing™</a></div>
+	</div>
 </div>
