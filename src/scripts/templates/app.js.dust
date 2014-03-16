@@ -1,4 +1,7 @@
-<div class="toolbar">TrafficGlance</div>
+<div class="toolbar">
+  <a href="#"><img src="images/refresh-circle.svg" class="refresh-all"></a>
+  <div class="name">TrafficGlance</div>
+</div>
 <div class="container">
   <div id="routes" class="row">Loading...</div>
 </div>

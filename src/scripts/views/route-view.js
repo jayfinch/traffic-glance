@@ -7,6 +7,7 @@ define(function(require) {
   var RouteView = Backbone.View.extend({
 
     className: 'route col-sm-6 col-md-4',
+    fetchingTraffic: false,
     trafficModel: null,
 
     initialize: function() {
@@ -35,33 +36,42 @@ define(function(require) {
       return this;
     },
 
+    renderLoading: function() {
+      this.$('img').addClass('rotate');
+    },
+
     // Events
 
     onTrafficModelChange: function() {
+      this.fetchingTraffic = false;
       this.model.set({
         travelDurationStats: this.trafficModel.travelDurationStats(),
         travelDurationByCongestion: this.trafficModel.travelDurationByCongestion()
       });
+
     },
 
     // UI Events
 
     onClickRefresh: function(event) {
       event.preventDefault();
-      this.model.unset('travelDurationStats', {silent: true});
-      this.model.unset('travelDurationByCongestion', {silent: true});
-      this.render();
-      this.$('img').addClass('rotate');
       this.fetchTrafficData();
     },
 
     // Methods
 
     fetchTrafficData: function() {
-      this.trafficModel.fetch({
-        dataType : 'jsonp',
-        jsonp: 'jsonp'
-      });
+      if(!this.fetchingTraffic) {
+        this.fetchingTraffic = true;
+        this.model.unset('travelDurationStats', {silent: true});
+        this.model.unset('travelDurationByCongestion', {silent: true});
+        this.render();
+        this.renderLoading();
+        this.trafficModel.fetch({
+          dataType : 'jsonp',
+          jsonp: 'jsonp'
+        });
+      }
     }
 
   });

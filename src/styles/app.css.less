@@ -19,7 +19,7 @@ body {
 .container {
   width: auto;
   max-width: 1200px;
-  margin-top: @toolbar-height;
+  margin-top: @toolbar-height + 15px;;
   padding: 0 15px;
 
   @media (min-width: 768px) {
@@ -38,9 +38,20 @@ body {
   z-index: 1;
   background: #32393f;
   text-align: center;
-  padding-top: 13px;
   font-family: @thin-text;
   font-size: 25px;
+
+  .name {
+    padding-top: 13px;
+  }
+
+  img {
+    height: @toolbar-height;
+    width: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 }
 
 // routes
@@ -81,6 +92,7 @@ body {
   canvas {
     width: 100% !important; // force Chart.js to be responsive
     height: auto !important;
+    cursor: pointer;
   }
 
   img {

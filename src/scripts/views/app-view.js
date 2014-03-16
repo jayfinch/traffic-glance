@@ -17,6 +17,10 @@ define(function(require) {
       this.listenTo(this.configModel, 'change', this.onModelChange);
     },
 
+    events: {
+      'click .refresh-all': 'onClickRefreshAll'
+    },
+
     // Rendering
 
     render: function() {
@@ -44,6 +48,14 @@ define(function(require) {
 
     onModelChange: function() {
       this.renderRoutes();
+    },
+
+    // UI Events
+
+    onClickRefreshAll: function() {
+      _.each(this.childViews, function(childView) {
+        childView.fetchTrafficData();
+      });
     },
 
     // Methods

@@ -16,19 +16,21 @@ define(function(require) {
       var dirtyRoutes = this.get('routes');
       var cleanRoutes = [];
 
+      // harvest each url for its route information
       _.each(dirtyRoutes, function(dirtyRoute) {
         var cleanName = dirtyRoute.name;
         var cleanUrl = dirtyRoute.url;
         var cleanSegments = [];
 
-        // segments
         var matches = routeParameterRx.exec(dirtyRoute.url);
         var routeSegments = matches[1].split('~');
 
+        // parse each path segment
         _.each(routeSegments, function(segment) {
           var segmentInfo = segmentInfoRx.exec(segment);
           var waypointType = (segmentInfo[1] === 'pos') ? 'wp' : 'vwp';
 
+          // final path segment
           var cleanSegment = {
             type: waypointType,
             coordLat: segmentInfo[2],
@@ -38,7 +40,7 @@ define(function(require) {
           cleanSegments.push(cleanSegment);
         });
 
-        // final
+        // final route
         var cleanRoute = {
           name: cleanName,
           url: cleanUrl,

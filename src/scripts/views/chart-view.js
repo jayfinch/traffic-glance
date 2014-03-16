@@ -61,16 +61,8 @@ define(function(require) {
       var myDoughnut = new Chart(canvasContext);
 
       myDoughnut.Doughnut(colorizedData, options);
-    },
-
-    // Events
-
-    onTrafficModelChange: function() {
-      this.model.set({
-        travelDurationTotal: this.trafficModel.travelDurationTotal(),
-        travelDurationByCongestion: this.trafficModel.travelDurationByCongestion()
-      });
     }
+
   });
 
   return ChartView;
