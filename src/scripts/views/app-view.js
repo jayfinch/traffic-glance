@@ -8,11 +8,10 @@ define(function(require) {
 
   var AppView = Backbone.View.extend({
 
-    childViews: [], // todo: move to app model
+    childViews: [],
     configModel: null,
 
     initialize: function() {
-      // todo: specify distance units
       this.configModel = ConfigModel.instance();
       this.listenTo(this.configModel, 'change', this.onModelChange);
     },
@@ -34,7 +33,12 @@ define(function(require) {
       var routesDiv = this.$('#routes');
       routesDiv.empty();
 
+      // build child views
       _.each(routes, function(route) {
+        _.extend(route, {
+          units: self.configModel.get('units')
+        });
+
         var routeView = new RouteView({
           model: new RouteModel(route)
         });

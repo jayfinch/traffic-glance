@@ -9,10 +9,10 @@
 					{hours}<span class="unit">hr</span>&nbsp;
 				{/hours}
 				{minutes}<span class="unit">min</span></div>
-	    <div class="distance">{distance} {distanceUnits}</div>
+	    <div class="distance">{distance} {units}</div>
     {:else}
 	    <div class="duration">—<span class="unit">min</span></div>
-	    <div class="distance">— {distanceUnits}</div>
+	    <div class="distance">— {units}</div>
     {/travelDurationStats}
   </div>
 </div>

@@ -5,6 +5,12 @@ define(function(require) {
   var instance;
   var ConfigModel = Backbone.Model.extend({
 
+    defaults: {
+      key: '',
+      units: 'mi',
+      childViews: []
+    },
+
     url: function() {
       return this.relPath() + 'config.json';
     },

@@ -1,5 +1,6 @@
 {
   "key": "YOUR BING MAPS KEY HERE",
+  "units": "mi",
   "routes": [
     {
       "name": "Disney World",

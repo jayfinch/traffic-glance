@@ -1,14 +1,16 @@
 define(function(require) {
-	var Backbone = require('backbone');
+  var Backbone = require('backbone');
 
-	var RouteModel = Backbone.Model.extend({
-		defaults: {
-			name: '',
-			url: '',
-			segments: [],
-			distanceUnits: 'mi'
-		}
-	});
+  var RouteModel = Backbone.Model.extend({
 
-	return RouteModel;
+    defaults: {
+      name: '',
+      url: '',
+      segments: [],
+      units: ''
+    }
+
+  });
+
+  return RouteModel;
 });

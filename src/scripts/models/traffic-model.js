@@ -7,14 +7,19 @@ define(function(require) {
 
     initialize: function(options) {
       this.coords = options.coords;
+      this.configModel = ConfigModel.instance();
     },
 
     url: function() {
-      var string = 'http://dev.virtualearth.net/REST/V1/Routes/Driving?&distanceUnit=mi&';
+      var string = 'http://dev.virtualearth.net/REST/V1/Routes/Driving?&';
+
+      string += 'distanceUnit=' + this.configModel.get('units') + '&';
+
       _.each(this.coords, function(coord, index) {
-        string = string + coord.type + '.' + index + '=' + coord.coordLat + ',' + coord.coordLong + '&';
+        string += coord.type + '.' + index + '=' + coord.coordLat + ',' + coord.coordLong + '&';
       });
-      string = string + 'key=' + ConfigModel.instance().get('key');
+
+      string += 'key=' + this.configModel.get('key');
       return string;
     },
 
@@ -40,24 +45,24 @@ define(function(require) {
               if (warning.warningType === 'TrafficFlow') {
                 switch(warning.severity) {
                 case 'Low Impact':
-                  none = none + item.travelDuration;
+                  none += item.travelDuration;
                   break;
                 case 'Minor':
-                  low = low + item.travelDuration;
+                  low += item.travelDuration;
                   break;
                 case 'Moderate':
-                  medium = medium + item.travelDuration;
+                  medium += item.travelDuration;
                   break;
                 case 'Serious':
-                  high = high + item.travelDuration;
+                  high += item.travelDuration;
                   break;
                 default:
-                  none = none + item.travelDuration;
+                  none += item.travelDuration;
                 }
               }
             });
           } else {
-            none = none + item.travelDuration;
+            none += item.travelDuration;
           }
         });
 
@@ -79,9 +84,7 @@ define(function(require) {
 
       var hours  = Math.floor( seconds / ( 60 * 60 ) );
       seconds -= hours * ( 60 * 60 );
-
       var minutes  = Math.round( seconds / 60 );
-      seconds -= minutes * 60;
 
       var distance = this.get('resourceSets')[0].resources[0].travelDistance;
       distance = Math.round(distance * 10) / 10;
