@@ -21,17 +21,17 @@ define(function(require) {
     travelDurationByCongestion: function() {
       var resource = this.get('resourceSets')[0].resources[0];
       var itineraryLegs = resource.routeLegs;
-      var total = 0;
+      var total;
       var none = 0;
       var low = 0;
       var medium = 0;
       var high = 0;
 
-      // each destination is a leg
+      // each destination is a "leg"
       _.each(itineraryLegs, function(leg) {
         var itineraryItems = leg.itineraryItems;
 
-        // each leg is broken into segments
+        // each leg broken into segments
         _.each(itineraryItems, function(item) {
           if (item.warnings) {
 
@@ -86,6 +86,7 @@ define(function(require) {
       var distance = this.get('resourceSets')[0].resources[0].travelDistance;
       distance = Math.round(distance * 10) / 10;
 
+      // build stats object
       if(hours) travelDurationStats.hours = hours;
       if(minutes) travelDurationStats.minutes = minutes;
       if(totalSeconds) travelDurationStats.totalSeconds = totalSeconds;
