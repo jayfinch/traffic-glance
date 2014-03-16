@@ -2,7 +2,7 @@ define(function(require) {
   var Backbone = require('backbone');
   var RouteTemplate = require('../templates/route');
   var TrafficModel = require('../models/traffic-model');
-  var PieChartView = require('./piechart-view');
+  var ChartView = require('./chart-view');
 
   var RouteView = Backbone.View.extend({
 
@@ -25,12 +25,12 @@ define(function(require) {
     // Rendering
 
     render: function() {
-      var pieChartView = new PieChartView({
+      var chartView = new ChartView({
         model: this.model
       });
 
       this.$el.html(RouteTemplate.renderSync(this.model.toJSON()));
-      this.$('.chart').html(pieChartView.render().el);
+      this.$('.chart').html(chartView.render().el);
 
       return this;
     },
@@ -48,6 +48,9 @@ define(function(require) {
 
     onClickRefresh: function(event) {
       event.preventDefault();
+      this.model.unset('travelDurationStats', {silent: true});
+      this.model.unset('travelDurationByCongestion', {silent: true});
+      this.render();
       this.$('img').addClass('rotate');
       this.fetchTrafficData();
     },

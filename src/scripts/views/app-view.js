@@ -34,6 +34,7 @@ define(function(require) {
         var routeView = new RouteView({
           model: new RouteModel(route)
         });
+
         self.childViews.push(routeView);
         routesDiv.append(routeView.render().el);
       });

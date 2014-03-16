@@ -3,7 +3,7 @@ define(function(require) {
   var PieChartTemplate = require('../templates/chart');
   require('../libs/chart');
 
-  var RouteView = Backbone.View.extend({
+  var ChartView = Backbone.View.extend({
 
     RED_CLR: '#e01e1b',
     ORANGE_CLR: '#feaf01',
@@ -73,5 +73,5 @@ define(function(require) {
     }
   });
 
-  return RouteView;
+  return ChartView;
 });

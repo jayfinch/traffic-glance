@@ -27,10 +27,15 @@ define(function(require) {
       var medium = 0;
       var high = 0;
 
+      // each destination is a leg
       _.each(itineraryLegs, function(leg) {
         var itineraryItems = leg.itineraryItems;
+
+        // each leg is broken into segments
         _.each(itineraryItems, function(item) {
           if (item.warnings) {
+
+            // examine warnings
             _.each(item.warnings, function(warning) {
               if (warning.warningType === 'TrafficFlow') {
                 switch(warning.severity) {
@@ -47,7 +52,6 @@ define(function(require) {
                   high = high + item.travelDuration;
                   break;
                 default:
-                  // todo: log error
                   none = none + item.travelDuration;
                 }
               }
@@ -63,10 +67,8 @@ define(function(require) {
           low: low,
           none: none
         };
-
-
       });
-      console.log('pie total: ' + (total.high + total.medium + total.low + total.none));
+
       return total;
     },
 
@@ -89,7 +91,6 @@ define(function(require) {
       if(totalSeconds) travelDurationStats.totalSeconds = totalSeconds;
       if(distance) travelDurationStats.distance = distance;
 
-      console.log('total seconds: ' + totalSeconds);
       return travelDurationStats;
     }
 
