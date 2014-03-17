@@ -1,7 +1,13 @@
 <div class="name"><a href="{url}" target="_blank">{name}</a></div>
 
 <div class="row">
-  <div class="col-xs-5 col-sm-4 chart"></div>
+  <div class="col-xs-5 col-sm-4 chart">
+		{?travelDurationByCongestion}
+			<canvas height="120" width="120" class="img-responsive">
+		{:else}
+			<a href="#" class="refresh" title="Refresh"><img src="images/refresh-circle.svg" class="img-responsive center-block"></a>
+		{/travelDurationByCongestion}
+  </div>
   <div class="col-xs-4 col-sm-5 stats">
     {#travelDurationStats}
 	    <div class="duration">

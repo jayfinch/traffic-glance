@@ -7,7 +7,8 @@ define(function(require) {
       name: '',
       url: '',
       segments: [],
-      units: ''
+      units: '',
+      fetchingTraffic: false
     }
 
   });

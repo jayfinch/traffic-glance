@@ -1,6 +1,5 @@
 define(function(require) {
   var Backbone = require('backbone');
-  var PieChartTemplate = require('../templates/chart');
   require('../libs/chart');
 
   var ChartView = Backbone.View.extend({
@@ -10,20 +9,11 @@ define(function(require) {
     GREEN_CLR: '#45c43f',
     LIGHTGREEN_CLR: '#aac42f',
 
-    initialize: function() {
-      this.listenTo(this.model, 'change', this.render);
-    },
-
     // Rendering
 
     render: function() {
-      this.$el.html(PieChartTemplate.renderSync(this.model.toJSON()));
-
       var congestionData = this.model.get('travelDurationByCongestion');
-      if(congestionData) {
-        this.renderPieChart(congestionData);
-      }
-
+      this.renderPieChart(congestionData);
       return this;
     },
 

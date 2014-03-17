@@ -84,7 +84,7 @@ define(function(require) {
 
       var hours  = Math.floor( seconds / ( 60 * 60 ) );
       seconds -= hours * ( 60 * 60 );
-      var minutes  = Math.round( seconds / 60 );
+      var minutes  = Math.floor( seconds / 60 );
 
       var distance = this.get('resourceSets')[0].resources[0].travelDistance;
       distance = Math.round(distance * 10) / 10;

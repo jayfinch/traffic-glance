@@ -1,5 +1,6 @@
 define(function(require) {
   var Backbone = require('backbone');
+  var _ = require('lodash');
   var RouteTemplate = require('../templates/route');
   var TrafficModel = require('../models/traffic-model');
   var ChartView = require('./chart-view');
@@ -7,15 +8,9 @@ define(function(require) {
   var RouteView = Backbone.View.extend({
 
     className: 'route col-sm-6 col-md-4',
-    fetchingTraffic: false,
-    trafficModel: null,
 
     initialize: function() {
-      this.trafficModel = new TrafficModel({
-        coords: this.model.get('segments')
-      });
-      this.listenTo(this.model, 'change', this.render);
-      this.listenTo(this.trafficModel, 'change', this.onTrafficModelChange);
+      this.listenTo(this.model, 'change:travelDurationStats', this.render);
     },
 
     events: {
@@ -26,29 +21,37 @@ define(function(require) {
     // Rendering
 
     render: function() {
-      var chartView = new ChartView({
-        model: this.model
-      });
-
       this.$el.html(RouteTemplate.renderSync(this.model.toJSON()));
-      this.$('.chart').html(chartView.render().el);
+
+      // render chart
+      if(this.model.get('travelDurationByCongestion')) {
+        var chartView = new ChartView({
+          el: this.$('.chart'),
+          model: this.model
+        });
+        chartView.render();
+      }
+
+      // render loading
+      if(this.model.get('fetchingTraffic')) {
+        this.$('img').addClass('rotate');
+      }
 
       return this;
     },
 
-    renderLoading: function() {
-      this.$('img').addClass('rotate');
-    },
-
     // Events
 
-    onTrafficModelChange: function() {
-      this.fetchingTraffic = false;
+    onFetchSuccess: function(trafficModel) {
       this.model.set({
-        travelDurationStats: this.trafficModel.travelDurationStats(),
-        travelDurationByCongestion: this.trafficModel.travelDurationByCongestion()
+        travelDurationStats: trafficModel.travelDurationStats(),
+        travelDurationByCongestion: trafficModel.travelDurationByCongestion(),
+        fetchingTraffic: false
       });
+    },
 
+    onFetchError: function() {
+      // console.log('error');
     },
 
     // UI Events
@@ -61,15 +64,23 @@ define(function(require) {
     // Methods
 
     fetchTrafficData: function() {
-      if(!this.fetchingTraffic) {
-        this.fetchingTraffic = true;
-        this.model.unset('travelDurationStats', {silent: true});
-        this.model.unset('travelDurationByCongestion', {silent: true});
-        this.render();
-        this.renderLoading();
-        this.trafficModel.fetch({
+      if(!this.model.get('fetchingTraffic')) {
+
+        this.model.set({
+          travelDurationStats: false,
+          travelDurationByCongestion: false,
+          fetchingTraffic: true
+        });
+
+        var trafficModel = new TrafficModel({
+          coords: this.model.get('segments')
+        });
+
+        trafficModel.fetch({
           dataType : 'jsonp',
-          jsonp: 'jsonp'
+          jsonp: 'jsonp',
+          success: _.bind(this.onFetchSuccess, this),
+          error: _.bind(this.onFetchError, this)
         });
       }
     }
