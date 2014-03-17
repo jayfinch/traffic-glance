@@ -1,5 +1,8 @@
 define(function(require) {
   var Backbone = require('backbone');
+  var Q = require('q');
+  var Queue = require('q/queue');
+  var _ = require('lodash');
   require('../libs/chart');
 
   var ChartView = Backbone.View.extend({
@@ -12,12 +15,14 @@ define(function(require) {
     // Rendering
 
     render: function() {
-      var congestionData = this.model.get('travelDurationByCongestion');
-      this.renderPieChart(congestionData);
+      ChartView.addTask(_.bind(this.renderPieChart, this));
       return this;
     },
 
-    renderPieChart: function(data) {
+    renderPieChart: function() {
+      var deferred = Q.defer();
+      var data = this.model.get('travelDurationByCongestion');
+
       var colorizedData = [
         {
           value: data.high,
@@ -37,6 +42,10 @@ define(function(require) {
         }
       ];
 
+      var onRenderComplete = function () {
+        deferred.resolve(true);
+      };
+
       var options = {
         animation: true,
         animateRotate: false,
@@ -44,16 +53,27 @@ define(function(require) {
         percentageInnerCutout: 45,
         animationSteps: 40,
         segmentStrokeWidth: 2,
-        segmentStrokeColor: '#3f474f'
+        segmentStrokeColor: '#3f474f',
+        onAnimationComplete: onRenderComplete
       };
 
       var canvasContext = this.$('canvas')[0].getContext('2d');
       var myDoughnut = new Chart(canvasContext);
-
       myDoughnut.Doughnut(colorizedData, options);
+
+      return deferred.promise;
     }
 
   });
+
+  ChartView.staticQueue = new Queue();
+  ChartView.staticQueue.put();
+
+  ChartView.addTask = function(task) {
+    return ChartView.staticQueue.get()
+    .then(task)
+    .fin(ChartView.staticQueue.put);
+  };
 
   return ChartView;
 });
