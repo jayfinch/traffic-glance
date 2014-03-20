@@ -4,7 +4,7 @@
 
 * Quickly see the information you need without all the clutter
 * Low barrier to entry:
-	* 100% client-side (entirely HTML/Javascript)
+	* 100% client-side (HTML/Javascript)
 	* Just upload it to your server
 * Responsive layout
 
@@ -12,9 +12,9 @@
 
 ### 1. Get an API key from Microsoft
 
-Head over to https://www.bingmapsportal.com and make an account. It's a quick process and you should easily get a developer key (a string of text about 60 characters long).
+Head over to https://www.bingmapsportal.com and make an account. It's a quick process and you'll end up with a developer key (a string of text about 60 characters long).
 
-Save this for later.
+Save this key for later.
 
 ### 2. Create your first route
 
@@ -38,4 +38,4 @@ Place the contents of `dist` on your web server. The app should work at the root
 
 ## Disclaimer
 
-Microsoft does not offer a commercial license for any app to use their traffic data in a generalized fashion. Therefore, this project is only available for your own personal/educational use. I wish I could put this on the the mobile app stores	 for free, but they will not permit it.
+Microsoft does not offer a commercial license for any app to use their traffic data in a generalized fashion. Therefore, this project is only available for your own personal/educational use. I wish I could put this on the mobile app stores	 for free, but they will not permit it.
