@@ -23,61 +23,87 @@ define(function(require) {
       return string;
     },
 
-    travelDurationByCongestion: function() {
+    _parseLegDetails: function() {
+      var warningWhitelist = [
+        'Accident',
+        'BlockedRoad',
+        'Congestion',
+        'DisabledVehicle',
+        'Miscellaneous',
+        'Other',
+        'OtherTrafficIncidents',
+        'PlannedEvents',
+        'RoadClosures',
+        'RoadHazard',
+        'ScheduledConstruction',
+        'SeasonalClosures',
+        'Weather',
+      ];
+
       var resource = this.get('resourceSets')[0].resources[0];
       var itineraryLegs = resource.routeLegs;
-      var total;
-      var none = 0;
-      var low = 0;
-      var medium = 0;
-      var high = 0;
 
-      // each destination is a "leg"
+      var totalWarnings = [];
+      var noCongestion = 0;
+      var lowCongestion = 0;
+      var moderateCongestion = 0;
+      var seriousCongestion = 0;
+
+      // each hard destination is a "leg"
       _.each(itineraryLegs, function(leg) {
         var itineraryItems = leg.itineraryItems;
 
         // each leg broken into segments
         _.each(itineraryItems, function(item) {
-          if (item.warnings) {
 
-            // examine warnings
+          if (item.warnings) {
             _.each(item.warnings, function(warning) {
               if (warning.warningType === 'TrafficFlow') {
+
+                // add up distance by congestion
                 switch(warning.severity) {
-                case 'Low Impact':
-                  none += item.travelDuration;
-                  break;
                 case 'Minor':
-                  low += item.travelDuration;
+                  lowCongestion += item.travelDistance;
+                  break;
+                case 'Low Impact':
+                  lowCongestion += item.travelDistance;
                   break;
                 case 'Moderate':
-                  medium += item.travelDuration;
+                  moderateCongestion += item.travelDistance;
                   break;
                 case 'Serious':
-                  high += item.travelDuration;
+                  seriousCongestion += item.travelDistance;
                   break;
                 default:
-                  none += item.travelDuration;
+                  noCongestion += item.travelDistance;
                 }
+              } else if(_.contains(warningWhitelist, warning.warningType)){
+
+                // capture non-congestion warnings
+                totalWarnings.push(warning.text);
               }
             });
           } else {
-            none += item.travelDuration;
+            // default to green
+            noCongestion += item.travelDistance;
           }
         });
-
-        total = {
-          high: high,
-          medium: medium,
-          low: low,
-          none: none
-        };
       });
 
-      return total;
+      var results =  {
+        totalCongestion: {
+          noCongestion: noCongestion,
+          lowCongestion: lowCongestion,
+          moderateCongestion: moderateCongestion,
+          seriousCongestion: seriousCongestion
+        },
+        totalWarnings: totalWarnings
+      };
+
+      return results;
     },
 
-    travelDurationStats: function() {
+    _parseDurationStats: function() {
       var travelDurationStats = {};
       var totalSeconds = this.get('resourceSets')[0].resources[0].travelDurationTraffic;
       var seconds = totalSeconds;
@@ -96,6 +122,15 @@ define(function(require) {
       if(distance) travelDurationStats.distance = distance;
 
       return travelDurationStats;
+    },
+
+    formatResults: function() {
+      var legDetails = this._parseLegDetails();
+      return {
+        travelDurationStats: this._parseDurationStats(),
+        travelDurationByCongestion: legDetails.totalCongestion,
+        travelWarnings: legDetails.totalWarnings
+      };
     }
 
   });

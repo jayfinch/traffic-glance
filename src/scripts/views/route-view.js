@@ -43,9 +43,12 @@ define(function(require) {
     // Events
 
     onFetchSuccess: function(trafficModel) {
+      var results = trafficModel.formatResults();
+
       this.model.set({
-        travelDurationStats: trafficModel.travelDurationStats(),
-        travelDurationByCongestion: trafficModel.travelDurationByCongestion(),
+        travelDurationStats: results.travelDurationStats,
+        travelDurationByCongestion: results.travelDurationByCongestion,
+        travelWarnings: results.travelWarnings,
         fetchingTraffic: false
       });
     },
@@ -69,6 +72,7 @@ define(function(require) {
         this.model.set({
           travelDurationStats: false,
           travelDurationByCongestion: false,
+          travelWarnings: [],
           fetchingTraffic: true
         });
 

@@ -8,9 +8,9 @@ define(function(require) {
   var ChartView = Backbone.View.extend({
 
     RED_CLR: '#e01e1b',
-    ORANGE_CLR: '#feaf01',
+    ORANGE_CLR: '#fc8d0d',
+    YELLOW_COLOR: '#ede725',
     GREEN_CLR: '#45c43f',
-    LIGHTGREEN_CLR: '#aac42f',
 
     // Rendering
 
@@ -25,19 +25,19 @@ define(function(require) {
 
       var colorizedData = [
         {
-          value: data.high,
+          value: data.seriousCongestion,
           color: this.RED_CLR
         },
         {
-          value : data.medium,
+          value : data.moderateCongestion,
           color : this.ORANGE_CLR
         },
         {
-          value : data.low,
-          color : this.LIGHTGREEN_CLR
+          value : data.lowCongestion,
+          color : this.YELLOW_COLOR
         },
         {
-          value : data.none,
+          value : data.noCongestion,
           color : this.GREEN_CLR
         }
       ];

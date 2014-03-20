@@ -1,9 +1,15 @@
 {
-  "globals": [
-    "requirejs",
-    "require",
-    "define",
-    "Chart"
-  ],
-  "strict": false
+  "camelcase": true,
+  "curly": false,
+  "indent": 2,
+  "latedef": true,
+  "quotmark": "single",
+  "strict": false,
+  "trailing": true,
+  "node": true,
+  "globals": {
+    "requirejs": false,
+    "require": false,
+    "define": false
+  }
 }

@@ -2,24 +2,40 @@
 
 <div class="row">
   <div class="col-xs-5 col-sm-4 chart">
-		{?travelDurationByCongestion}
-			<canvas height="120" width="120" class="img-responsive">
-		{:else}
-			<a href="#" class="refresh" title="Refresh"><img src="images/refresh-circle.svg" class="img-responsive center-block"></a>
-		{/travelDurationByCongestion}
-  </div>
-  <div class="col-xs-4 col-sm-5 stats">
-    {#travelDurationStats}
-	    <div class="duration">
-				{#hours}
-					<span class="nobreak">{hours}<span class="unit">&nbsp;hr&nbsp;&nbsp;</span></span><span><!--space--></span>
-				{/hours}
-				<span class="nobreak">{minutes}<span class="unit">&nbsp;min</span></span>
-			</div>
-	    <div class="distance"><span class="nobreak">{distance} {units}</span></div>
+
+    {?travelDurationByCongestion}
+      <canvas height="150" width="150" class="img-responsive">
     {:else}
-	    <div class="duration"><span class="nobreak">—<span class="unit">&nbsp;min</span></span></div>
-	    <div class="distance"><span class="nobreak">—&nbsp;{units}</span></div>
+      <a href="#" class="refresh" title="Refresh"><img src="images/refresh-circle.svg" class="img-responsive center-block"></a>
+    {/travelDurationByCongestion}
+
+  </div>
+  <div class="col-xs-7 col-sm-8 stats">
+
+    {#travelDurationStats}
+      <div class="duration">
+        {#hours}
+          <span class="nobreak">{hours}<span class="unit">&nbsp;hr&nbsp;&nbsp;</span></span><span><!--space--></span>
+        {/hours}
+        <span class="nobreak">{minutes}<span class="unit">&nbsp;min</span></span>
+      </div>
+      <div class="distance"><span class="nobreak">{distance} {units}</span></div>
+    {:else}
+      <div class="duration"><span class="nobreak">—<span class="unit">&nbsp;min</span></span></div>
+      <div class="distance"><span class="nobreak">—&nbsp;{units}</span></div>
     {/travelDurationStats}
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    {?travelWarnings}
+      <ul class="warnings">
+        {#travelWarnings}
+          <li>{.}</li>
+        {/travelWarnings}
+      </ul>
+    {/travelWarnings}
   </div>
 </div>
