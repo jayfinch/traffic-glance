@@ -10,6 +10,7 @@
   "globals": {
     "requirejs": false,
     "require": false,
-    "define": false
+    "define": false,
+    "Chart": false
   }
 }

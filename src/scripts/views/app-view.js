@@ -44,7 +44,8 @@ define(function(require) {
         });
 
         self.childViews.push(routeView);
-        routesDiv.append(routeView.render().el);
+        routeView.render();
+        routesDiv.append(routeView.el);
       });
     },
 
@@ -58,7 +59,7 @@ define(function(require) {
 
     onClickRefreshAll: function() {
       _.each(this.childViews, function(childView) {
-        childView.fetchTrafficData();
+        childView.updateRouteWithTraffic();
       });
     },
 

@@ -1,8 +1,6 @@
 define(function(require) {
   var Backbone = require('backbone');
   var Q = require('q');
-  var Queue = require('q/queue');
-  var _ = require('lodash');
   require('../libs/chart');
 
   var ChartView = Backbone.View.extend({
@@ -15,11 +13,6 @@ define(function(require) {
     // Rendering
 
     render: function() {
-      ChartView.addTask(_.bind(this.renderPieChart, this));
-      return this;
-    },
-
-    renderPieChart: function() {
       var deferred = Q.defer();
       var data = this.model.get('travelDurationByCongestion');
 
@@ -43,7 +36,7 @@ define(function(require) {
       ];
 
       var onRenderComplete = function () {
-        deferred.resolve(true);
+        deferred.resolve();
       };
 
       var options = {
@@ -65,15 +58,6 @@ define(function(require) {
     }
 
   });
-
-  ChartView.staticQueue = new Queue();
-  ChartView.staticQueue.put();
-
-  ChartView.addTask = function(task) {
-    return ChartView.staticQueue.get()
-    .then(task)
-    .fin(ChartView.staticQueue.put);
-  };
 
   return ChartView;
 });
