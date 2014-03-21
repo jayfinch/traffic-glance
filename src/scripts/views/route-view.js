@@ -19,8 +19,6 @@ define(function(require) {
     // Rendering
 
     render: function() {
-      var deferred = Q.defer();
-
       this.$el.html(RouteTemplate.renderSync(this.model.toJSON()));
 
       // render chart
@@ -30,8 +28,6 @@ define(function(require) {
           model: this.model
         });
         return chartView.render();
-      } else {
-        deferred.resolve();
       }
 
       // render loading
@@ -39,7 +35,7 @@ define(function(require) {
         this.$('img').addClass('rotate');
       }
 
-      return deferred.promise;
+      return Q();
     },
 
     // UI Events
@@ -55,9 +51,9 @@ define(function(require) {
       if(!this.model.get('fetchingTraffic')) {
         this.clearTrafficData();
         this.disableFetching();
-        this.render();
 
-        this.fetchTrafficModel()
+        return this.render()
+        .then(_.bind(this.fetchTrafficModel, this))
         .then(_.bind(this.populateTrafficData, this))
         .then(_.bind(this.queueRenderTask, this))
         .then(_.bind(this.enableFetching, this))

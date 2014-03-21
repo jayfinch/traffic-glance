@@ -44,8 +44,13 @@ define(function(require) {
         });
 
         self.childViews.push(routeView);
-        routeView.render();
-        routesDiv.append(routeView.el);
+
+        routeView.render()
+        .then(function() {
+          routesDiv.append(routeView.el);
+        })
+        .done();
+
       });
     },
 
