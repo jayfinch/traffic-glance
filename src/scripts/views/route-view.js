@@ -98,13 +98,8 @@ define(function(require) {
     },
 
     populateTrafficData: function(model) {
-      var results = model.formatResults();
-
-      this.model.set({
-        travelDurationStats: results.travelDurationStats,
-        travelDurationByCongestion: results.travelDurationByCongestion,
-        travelWarnings: results.travelWarnings
-      });
+      var newInfo = _.extend({}, model.formatResults());
+      this.model.set(newInfo);
     },
 
     disableFetching: function() {

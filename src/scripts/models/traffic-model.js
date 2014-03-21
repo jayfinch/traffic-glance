@@ -2,6 +2,7 @@ define(function(require) {
   var Backbone = require('backbone');
   var _ = require('lodash');
   var ConfigModel = require('../models/config-model');
+  var moment = require('moment');
 
   var TrafficModel = Backbone.Model.extend({
 
@@ -104,8 +105,8 @@ define(function(require) {
     },
 
     _parseDurationStats: function() {
-      var travelDurationStats = {};
       var totalSeconds = this.get('resourceSets')[0].resources[0].travelDurationTraffic;
+      var arriveTime = moment().add('s', totalSeconds).format('h:mm a');
       var seconds = totalSeconds;
 
       var hours  = Math.floor( seconds / ( 60 * 60 ) );
@@ -116,10 +117,13 @@ define(function(require) {
       distance = Math.round(distance * 10) / 10;
 
       // build stats object
-      if(hours) travelDurationStats.hours = hours;
-      if(minutes) travelDurationStats.minutes = minutes;
-      if(totalSeconds) travelDurationStats.totalSeconds = totalSeconds;
-      if(distance) travelDurationStats.distance = distance;
+      var travelDurationStats = {
+        hours: hours,
+        minutes: minutes,
+        totalSeconds: totalSeconds,
+        distance: distance,
+        arriveTime: arriveTime
+      };
 
       return travelDurationStats;
     },
