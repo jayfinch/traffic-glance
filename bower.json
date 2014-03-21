@@ -1,0 +1,31 @@
+{
+  "name": "traffic-glance",
+  "version": "0.0.0",
+  "dependencies": {
+    "backbone": "^1.x",
+    "bootstrap": "^3.x",
+    "chartjs": "*",
+    "dustjs-linkedin": "^2.x",
+    "dustjs-linkedin-helpers": "^1.x",
+    "jquery": "^2.x",
+    "lodash": "^2.x",
+    "moment": "^2.x",
+    "q": "^1.x",
+    "requirejs": "^2.x"
+  },
+  "exportsOverride": {
+    "dustjs-linkedin": {
+       "js": "dist/dust-core.js"
+    },
+    "dustjs-linkedin-helpers": {
+      "js": "dist/dust-helpers.js"
+    },
+    "chartjs": {
+       "js": "Chart.js"
+    },
+    "q": {
+       "js": "q.js"
+    },
+    "underscore": {}
+  }
+}

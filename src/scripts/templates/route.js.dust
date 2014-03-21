@@ -1,0 +1,45 @@
+<div class="name"><a href="{url}" target="_blank">{name}</a></div>
+
+<div class="row">
+  <div class="col-xs-5 col-sm-4 chart">
+
+    {?travelDurationByCongestion}
+      <canvas height="150" width="150" class="img-responsive">
+    {:else}
+      <a href="#" class="refresh" title="Refresh"><img src="images/refresh-circle.svg" class="img-responsive center-block"></a>
+    {/travelDurationByCongestion}
+
+  </div>
+  <div class="col-xs-7 col-sm-8 stats">
+
+    {#travelDurationStats}
+      <div class="duration">
+        {@if cond="{hours} > 0"}
+          <span class="nobreak">{hours}<span class="unit">&nbsp;hr&nbsp;&nbsp;</span></span><span><!--space--></span>
+        {/if}
+        {@if cond="{minutes} > 0"}
+          <span class="nobreak">{minutes}<span class="unit">&nbsp;min</span></span>
+        {/if}
+      </div>
+      <div class="detail"><span class="nobreak">{distance} {units}</span></div>
+      <div class="detail"><span class="nobreak">{arriveTime}</span></div>
+    {:else}
+      <div class="duration"><span class="nobreak">—</span></div>
+      <div class="detail"><span class="nobreak">—</span></div>
+      <div class="detail"><span class="nobreak">—</span></div>
+    {/travelDurationStats}
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    {?travelWarnings}
+      <ul class="warnings">
+        {#travelWarnings}
+          <li>{.}</li>
+        {/travelWarnings}
+      </ul>
+    {/travelWarnings}
+  </div>
+</div>
