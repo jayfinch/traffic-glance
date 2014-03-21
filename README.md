@@ -1,6 +1,8 @@
 # TrafficGlance
 
-[![Build Status](https://travis-ci.org/jayfinch/traffic-glance.svg?branch=develop)](https://travis-ci.org/jayfinch/traffic-glance) [![devDependency Status](https://david-dm.org/jayfinch/traffic-glance/dev-status.svg?theme=shields.io)](https://david-dm.org/jayfinch/traffic-glance#info=devDependencies)
+[![devDependency Status](https://david-dm.org/jayfinch/traffic-glance/dev-status.svg?theme=shields.io)](https://david-dm.org/jayfinch/traffic-glance#info=devDependencies) [![Build Status](https://travis-ci.org/jayfinch/traffic-glance.svg?branch=master)](https://travis-ci.org/jayfinch/traffic-glance) [![Build Status](https://travis-ci.org/jayfinch/traffic-glance.svg?branch=develop)](https://travis-ci.org/jayfinch/traffic-glance) 
+
+
 
 ## About
 
