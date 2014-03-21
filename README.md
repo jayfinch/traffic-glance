@@ -1,5 +1,7 @@
 # TrafficGlance
 
+[![Build Status](https://travis-ci.org/jayfinch/traffic-glance.svg?branch=develop)](https://travis-ci.org/jayfinch/traffic-glance) [![devDependency Status](https://david-dm.org/jayfinch/traffic-glance/dev-status.svg?theme=shields.io)](https://david-dm.org/jayfinch/traffic-glance#info=devDependencies)
+
 ## About
 
 * Quickly see the information you need without all the clutter
