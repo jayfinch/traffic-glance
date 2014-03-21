@@ -91,50 +91,47 @@ define(function(require) {
         });
       });
 
-      var results =  {
-        totalCongestion: {
+      return  {
+        travelDurationByCongestion: {
           noCongestion: noCongestion,
           lowCongestion: lowCongestion,
           moderateCongestion: moderateCongestion,
           seriousCongestion: seriousCongestion
         },
-        totalWarnings: totalWarnings
+        travelWarnings: totalWarnings
       };
-
-      return results;
     },
 
     _parseDurationStats: function() {
+      // hours & minutes
       var totalSeconds = this.get('resourceSets')[0].resources[0].travelDurationTraffic;
-      var arriveTime = moment().add('s', totalSeconds).format('h:mm a');
-      var seconds = totalSeconds;
+      var durationObj = moment.duration(totalSeconds, 'seconds');
+      var hoursNumber = durationObj.hours();
+      durationObj.subtract(hoursNumber, 'hours');
+      var minutesNumber = durationObj.minutes();
 
-      var hours  = Math.floor( seconds / ( 60 * 60 ) );
-      seconds -= hours * ( 60 * 60 );
-      var minutes  = Math.floor( seconds / 60 );
-
+      // distance
       var distance = this.get('resourceSets')[0].resources[0].travelDistance;
       distance = Math.round(distance * 10) / 10;
 
-      // build stats object
-      var travelDurationStats = {
-        hours: hours,
-        minutes: minutes,
-        totalSeconds: totalSeconds,
-        distance: distance,
-        arriveTime: arriveTime
-      };
+      // arrival time
+      var arriveTime = moment().add('s', totalSeconds).format('h:mm a');
 
-      return travelDurationStats;
+      return {
+        travelDurationStats: {
+          hours: hoursNumber,
+          minutes: minutesNumber,
+          distance: distance,
+          arriveTime: arriveTime
+        }
+      };
     },
 
     formatResults: function() {
+      var stats = this._parseDurationStats();
       var legDetails = this._parseLegDetails();
-      return {
-        travelDurationStats: this._parseDurationStats(),
-        travelDurationByCongestion: legDetails.totalCongestion,
-        travelWarnings: legDetails.totalWarnings
-      };
+      var results = _.extend(legDetails, stats);
+      return results;
     }
 
   });
