@@ -1,0 +1,2 @@
+define(["require","jquery","./views/app-view"],function(e){var r=e("jquery"),n=e("./views/app-view");return function(){var e=new n;r("body").prepend(e.render().el),e.bootstrap()}});
+//# sourceMappingURL=app.js.map

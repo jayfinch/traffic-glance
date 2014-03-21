@@ -6,7 +6,6 @@
 *.pid
 *.gz
 .DS_Store
-/dist
 /pids
 /logs
 /results
@@ -15,4 +14,5 @@
 /node_modules
 /bower_components
 src/config.json
+dist/config.json
 src/scripts/libs

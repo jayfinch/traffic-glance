@@ -1,0 +1,10 @@
+<div class="toolbar">
+  <a href="#"><img src="images/refresh-circle.svg" class="refresh-all"></a>
+  <div class="site-name">TrafficGlance</div>
+</div>
+<div class="container">
+  <div class="row" id="routes"><div class="loading">Loading...</div></div>
+  <div class="row credit">
+  	<div class="col-xs-12"><a href="#">Powered by Bing™</a></div>
+	</div>
+</div>

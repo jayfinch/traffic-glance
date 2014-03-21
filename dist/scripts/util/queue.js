@@ -1,0 +1,2 @@
+define(["require","q"],function(e){var r=e("q");return function(){var e=r.defer(),o=r.defer();return{put:function(o){var t=r.defer();e.resolve({head:o,tail:t.promise}),e.resolve=t.resolve},get:function(){var r=e.promise.get("head");return e.promise=e.promise.get("tail"),r.fail(function(e){throw o.resolve(e),e})},closed:o.promise,close:function(t){t=t||new Error("Can't get value from closed queue");var n={head:r.reject(t)};return n.tail=n,e.resolve(n),o.promise}}}});
+//# sourceMappingURL=queue.js.map

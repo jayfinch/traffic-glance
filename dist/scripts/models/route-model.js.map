@@ -1,0 +1,1 @@
+{"version":3,"file":"route-model.js","sources":["route-model.js.src.js"],"names":["define","require","Backbone","RouteModel","Model","extend","defaults","name","url","segments","units","fetchingTraffic"],"mappings":"AAAAA,QAAQ,UAAU,YAAY,SAASC,GACrC,GAAIC,GAAWD,EAAQ,YAEnBE,EAAaD,EAASE,MAAMC,QAE9BC,UACEC,KAAM,GACNC,IAAK,GACLC,YACAC,MAAO,GACPC,iBAAiB,IAKrB,OAAOR"}

@@ -1,0 +1,166 @@
+@import (less) "../scripts/libs/bootstrap/bootstrap.css";
+@import  "animation.less";
+
+// vars
+@light-gray: #b2b5b8;
+@medium-gray: #3f474f;
+@dark-gray: #32393f;
+@toolbar-height: 50px;
+@thin-text: HelveticaNeue-Thin, Helvetica, Arial, sans-serif;
+@thinnest-text: HelveticaNeue-UltraLight, Helvetica, Arial, sans-serif;
+
+body {
+  background: @medium-gray;
+  color: #fff;
+  font-family: @thin-text;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.container {
+  width: auto;
+  max-width: 1200px;
+  margin-top: @toolbar-height + 30px;;
+  padding: 0 15px;
+
+  @media (min-width: 768px) {
+    padding: 0 30px;
+  }
+}
+
+.loading {
+  font-size: 30px;
+  text-align: center;
+  padding: 30px 0;
+}
+
+// credit row
+
+.credit {
+  text-align: right;
+  font-size: 12px;
+  border-top: 1px solid #32393f;
+  margin: 30px 0 0 0;
+  padding-top: 15px;
+  padding-bottom: 30px;
+
+  a {
+    color: @light-gray;
+  }
+}
+
+// toolbar
+
+.toolbar {
+  height: @toolbar-height;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 1;
+  background: #32393f;
+  text-align: center;
+
+  .site-name {
+    padding-top: 11px;
+    font-family: @thin-text;
+    font-size: 20px;
+  }
+
+  img {
+    height: @toolbar-height;
+    width: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+// routes
+
+.route {
+  margin-bottom: 30px;
+
+  .name {
+    border-bottom: 1px solid #32393f;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    font-size: 18px;
+
+    a {
+      color: #fff;
+    }
+  }
+
+  // stats
+
+  .stats {
+    text-transform: uppercase;
+  }
+
+  .duration {
+    font-size: 45px;
+    font-family: @thinnest-text;
+  }
+
+  .detail, .unit {
+    font-size: 18px;
+    font-family: @thin-text;
+    color: @light-gray;
+  }
+
+  .nobreak {
+    white-space: nowrap;
+  }
+
+  // warnings
+
+  ul.warnings {
+    list-style: none;
+    margin: 0;
+    padding: 20px 0 0 0;
+    color: #fc8d0d;
+
+    li {
+      margin: 0;
+      padding: 0 0 10px 0
+    }
+  }
+
+  // chart
+
+  .refresh {}
+
+  canvas {
+    width: 100% !important; // force Chart.js to be responsive
+    height: auto !important;
+    cursor: pointer;
+  }
+
+  img {
+    width: 100%;
+    height: auto ;
+  }
+}
+
+// wrap every 2 items
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .route {
+    float: left;
+  }
+  .route:nth-child(2n+1) {
+    clear: left;
+  }
+}
+
+// wrap every 3 items
+
+@media (min-width: 992px) {
+  .route {
+    float: left;
+  }
+  .route:nth-child(3n+1) {
+    clear: left;
+  }
+}

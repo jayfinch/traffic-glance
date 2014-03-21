@@ -1,0 +1,1 @@
+{"version":3,"file":"app.js","sources":["app.js.src.js"],"names":["define","require","$","AppView","appView","prepend","render","el","bootstrap"],"mappings":"AAAAA,QAAQ,UAAU,SAAS,oBAAoB,SAASC,GACtD,GAAIC,GAAID,EAAQ,UACZE,EAAUF,EAAQ,mBAEtB,OAAO,YACL,GAAIG,GAAU,GAAID,EAClBD,GAAE,QAAQG,QAAQD,EAAQE,SAASC,IACnCH,EAAQI"}

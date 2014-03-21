@@ -124,4 +124,15 @@ module.exports = function(grunt) {
     'requirejs',
     'htmlmin'
   ]);
+
+  grunt.registerTask('test', [
+    'clean',
+    'bower',
+    'copy',
+    'less',
+    'jshint',
+    'dust',
+    'requirejs',
+    'htmlmin'
+  ]);
 };
