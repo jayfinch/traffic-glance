@@ -85,7 +85,7 @@ define(function(require) {
               }
             });
           } else {
-            // default to green
+            // default segment to green if no congestion
             noCongestion += item.travelDistance;
           }
         });
@@ -105,9 +105,9 @@ define(function(require) {
     _parseDurationStats: function() {
       // hours & minutes
       var totalSeconds = this.get('resourceSets')[0].resources[0].travelDurationTraffic;
-      var durationObj = moment.duration(totalSeconds, 'seconds');
+      var durationObj = moment.duration({seconds: totalSeconds});
       var hoursNumber = durationObj.hours();
-      durationObj.subtract(hoursNumber, 'hours');
+      durationObj.subtract({hours: hoursNumber});
       var minutesNumber = durationObj.minutes();
 
       // distance

@@ -25,6 +25,8 @@ define(function(require) {
       // harvest each url for its route information
       _.each(dirtyRoutes, function(dirtyRoute) {
         var cleanName = dirtyRoute.name;
+        var cleanStart = dirtyRoute.startTime;
+        var cleanEnd = dirtyRoute.endTime;
         var cleanUrl = dirtyRoute.url;
         var cleanSegments = [];
 
@@ -50,7 +52,9 @@ define(function(require) {
         var cleanRoute = {
           name: cleanName,
           url: cleanUrl,
-          segments: cleanSegments
+          segments: cleanSegments,
+          startTime: cleanStart,
+          endTime: cleanEnd
         };
 
         cleanRoutes.push(cleanRoute);

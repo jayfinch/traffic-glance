@@ -5,10 +5,12 @@ define(function(require) {
   var ConfigModel = require('../models/config-model');
   var RouteModel = require('../models/route-model');
   var RouteView = require('./route-view');
+  var moment = require('moment');
 
   var AppView = Backbone.View.extend({
 
-    childViews: [],
+    relevantViews: [],
+    nonRelevantViews: [],
     configModel: null,
 
     initialize: function() {
@@ -30,8 +32,7 @@ define(function(require) {
     renderRoutes: function() {
       var self = this;
       var routes = this.configModel.routes();
-      var routesDiv = this.$('#routes');
-      routesDiv.empty();
+      this.$('#routes').empty();
 
       // build child views
       _.each(routes, function(route) {
@@ -43,14 +44,25 @@ define(function(require) {
           model: new RouteModel(route)
         });
 
-        self.childViews.push(routeView);
+        // somewhat respect the original order
+        var container = self.autoLoad(route) ? self.relevantViews : self.nonRelevantViews;
+        container.push(routeView);
 
-        routeView.render()
+        self.renderChildViews(self.relevantViews, true);
+        self.renderChildViews(self.nonRelevantViews, false);
+      });
+    },
+
+    renderChildViews: function(array, fetch) {
+      var routesDiv = this.$('#routes');
+
+      _.each(array, function(view) {
+        view.render()
         .then(function() {
-          routesDiv.append(routeView.el);
+          routesDiv.append(view.el);
+          if (fetch) view.updateRouteWithTraffic();
         })
         .done();
-
       });
     },
 
@@ -62,9 +74,13 @@ define(function(require) {
 
     // UI Events
 
-    onClickRefreshAll: function() {
-      _.each(this.childViews, function(childView) {
-        childView.updateRouteWithTraffic();
+    onClickRefreshAll: function(event) {
+      event.preventDefault();
+      _.each(this.relevantViews, function(view) {
+        view.updateRouteWithTraffic();
+      });
+      _.each(this.nonRelevantViews, function(view) {
+        view.updateRouteWithTraffic();
       });
     },
 
@@ -72,6 +88,14 @@ define(function(require) {
 
     bootstrap: function() {
       this.configModel.fetch();
+    },
+
+    autoLoad: function(route) {
+      var now = moment();
+      var afterStart = now.isAfter(moment(route.startTime, 'h:mm a'));
+      var beforeEnd = now.isBefore(moment(route.endTime, 'h:mm a'));
+
+      return afterStart && beforeEnd ? true : false;
     }
 
   });
