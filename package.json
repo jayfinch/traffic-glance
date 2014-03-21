@@ -33,7 +33,8 @@
     "karma-requirejs": "*",
     "karma-coffee-preprocessor": "*",
     "karma-phantomjs-launcher": "*",
-    "karma-mocha": "*"
+    "karma-mocha": "*",
+    "grunt-bower-task": "^0.3.4"
   },
   "dependencies": {
     "express": "*"

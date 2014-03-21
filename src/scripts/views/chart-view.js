@@ -1,7 +1,7 @@
 define(function(require) {
   var Backbone = require('backbone');
   var Q = require('q');
-  require('../libs/chart');
+  require('chart');
 
   var ChartView = Backbone.View.extend({
 

@@ -1,7 +1,6 @@
 # TrafficGlance
 
-[![devDependency Status](https://david-dm.org/jayfinch/traffic-glance/dev-status.svg?theme=shields.io)](https://david-dm.org/jayfinch/traffic-glance#info=devDependencies) [![Build Status](https://travis-ci.org/jayfinch/traffic-glance.svg?branch=master)](https://travis-ci.org/jayfinch/traffic-glance) [![Build Status](https://travis-ci.org/jayfinch/traffic-glance.svg?branch=develop)](https://travis-ci.org/jayfinch/traffic-glance)
-
+[![devDependency Status](https://david-dm.org/jayfinch/traffic-glance/dev-status.svg?theme=shields.io)](https://david-dm.org/jayfinch/traffic-glance#info=devDependencies) [![Build Status](https://travis-ci.org/jayfinch/traffic-glance.svg?branch=master)](https://travis-ci.org/jayfinch/traffic-glance)
 ## About
 
 * Quickly see traffic conditions without all the clutter
@@ -54,6 +53,16 @@ Specify a `startTime` and `endTime` in your routes. If it's currently within tha
 
 ### Units
 You may specify units as `mi` or `km`
+
+## Developer guide
+
+You must have [Node](http://nodejs.org) and [Grunt](http://gruntjs.com) installed.
+
+* Install dev dependencies: `npm install`
+* Install front-end dependencies: `grunt bower`
+* Compile: `grunt`
+* Run tests: `npm test`
+* Start local server: `grunt connect`
 
 ## Disclaimer
 

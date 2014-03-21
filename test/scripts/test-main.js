@@ -11,23 +11,19 @@ for(var file in window.__karma__.files) {
 require.config({
   baseUrl: '/base/dist/scripts',
   paths: {
-    'jquery': './libs/jquery',
-    'lodash': './libs/lodash',
-    'backbone': './libs/backbone',
-    'q': './libs/q',
-    'q/queue': './libs/queue',
-    'dust': './libs/dust',
-    'bootstrap': './libs/bootstrap'
+    'jquery': './libs/jquery/jquery',
+    'lodash': './libs/lodash/lodash.compat',
+    'backbone': './libs/backbone/backbone',
+    'q': './libs/q/js/q',
+    'q/queue': './util/queue',
+    'dust': './libs/dustjs-linkedin-helpers/js/dust-helpers',
+    'moment': './libs/moment/moment',
+    'chart': './libs/chartjs/js/Chart'
   },
   shim: {
     'dust': {
-      exports: 'dust'
-    },
-    'bootstrap' : {
-      exports: 'jQuery',
-      deps: [
-        'jquery'
-      ]
+      exports: 'dust',
+      deps: ['./libs/dustjs-linkedin/js/dust-core']
     }
   },
   map: {

@@ -5,6 +5,15 @@ module.exports = function(grunt) {
         'dist'
       ]
     },
+    bower: {
+      install: {
+        options: {
+          targetDir: './src/scripts/libs',
+          cleanup: true,
+          layout: 'byComponent'
+        }
+      }
+    },
     copy: {
       build : {
         expand: true,
@@ -39,7 +48,7 @@ module.exports = function(grunt) {
       build: {
         expand: true,
         cwd: 'src',
-        src: "**/*.js.dust",
+        src: '**/*.js.dust',
         dest: 'dist',
         ext: '.js',
         filter: 'isFile'
