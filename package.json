@@ -35,6 +35,7 @@
     "karma-coffee-preprocessor": "^0.x",
     "karma-phantomjs-launcher": "^0.x",
     "karma-mocha": "^0.x",
-    "karma-sinon-chai": "^0.x"
+    "karma-sinon-chai": "^0.x",
+    "karma-coverage": "^0.x"
   }
 }

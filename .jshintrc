@@ -17,6 +17,16 @@
     "should": false,
     "expect": false,
     "assert": false,
+    "describe": false,
+    "it": false,
+    "before": false,
+    "after": false,
+    "beforeEach": false,
+    "afterEach": false,
+    "suite": false,
+    "test": false,
+    "setup": false,
+    "teardown": false,
     "Chart": false
   }
 }

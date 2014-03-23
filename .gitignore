@@ -13,6 +13,7 @@
 /.grunt
 /node_modules
 /bower_components
+src/scripts/libs
+/coverage
 src/config.json
 dist/config.json
-src/scripts/libs

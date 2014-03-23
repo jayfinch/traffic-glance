@@ -12,8 +12,12 @@ module.exports = function(config) {
       {pattern: 'test/**/*.js*', included: false}
     ],
     reporters: [
-      'progress'
+      'progress',
+      'coverage'
     ],
+    preprocessors: {
+      'src/**/*.js': ['coverage']
+    },
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
