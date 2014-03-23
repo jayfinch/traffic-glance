@@ -55,12 +55,12 @@ You may specify `units` as `mi` or `km`
 
 ## Developer guide
 
-You must have [Node](http://nodejs.org) and [Grunt](http://gruntjs.com) installed.
+You must have [Node](http://nodejs.org), [Grunt](http://gruntjs.com) and [Karma](http://karma-runner.github.io) installed.
 
 * Install dev dependencies: `npm install`
 * Install front-end dependencies: `grunt bower`
 * Compile: `grunt`
-* Run tests: `npm test`
+* Run tests: `karma start`
 * Start local server: `grunt connect`
 
 ## Disclaimer
