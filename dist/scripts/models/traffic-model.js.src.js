@@ -38,7 +38,7 @@ define(['require','backbone','lodash','../models/config-model','moment'],functio
         'RoadHazard',
         'ScheduledConstruction',
         'SeasonalClosures',
-        'Weather',
+        'Weather'
       ];
 
       var resource = this.get('resourceSets')[0].resources[0];

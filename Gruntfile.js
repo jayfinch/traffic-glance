@@ -6,7 +6,7 @@ module.exports = function(grunt) {
       ]
     },
     bower: {
-      install: {
+      build: {
         options: {
           targetDir: './src/scripts/libs',
           cleanup: true,
@@ -40,9 +40,10 @@ module.exports = function(grunt) {
     dust: {
       options: {
         wrapper: 'amd',
-        helper: 'dust',
+        helper: 'q',
         dependencies: {
-          dust: 'dust'
+          dust: 'dust',
+          Q: 'q'
         }
       },
       build: {
@@ -73,7 +74,8 @@ module.exports = function(grunt) {
         jshintrc: true
       },
       build: [
-        'src/**/*.js'
+        'src/**/*.js',
+        'test/**/*.js'
       ]
     },
     htmlmin: {
@@ -90,6 +92,15 @@ module.exports = function(grunt) {
         filter: 'isFile'
       }
     },
+    karma: {
+      build: {
+        configFile: 'karma.conf.js',
+        singleRun: true,
+        browsers: [
+          'PhantomJS'
+        ]
+      }
+    },
     watch: {
       options: {
         interupt: true,
@@ -103,10 +114,10 @@ module.exports = function(grunt) {
       }
     },
     connect: {
-      server: {
+      build: {
         options: {
           base: 'dist',
-          livereload: false,
+          livereload: true,
           keepalive: true
         }
       }
@@ -122,17 +133,7 @@ module.exports = function(grunt) {
     'jshint',
     'dust',
     'requirejs',
-    'htmlmin'
-  ]);
-
-  grunt.registerTask('test', [
-    'clean',
-    'bower',
-    'copy',
-    'less',
-    'jshint',
-    'dust',
-    'requirejs',
-    'htmlmin'
+    'htmlmin',
+    'karma'
   ]);
 };

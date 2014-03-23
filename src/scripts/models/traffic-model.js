@@ -38,7 +38,7 @@ define(function(require) {
         'RoadHazard',
         'ScheduledConstruction',
         'SeasonalClosures',
-        'Weather',
+        'Weather'
       ];
 
       var resource = this.get('resourceSets')[0].resources[0];

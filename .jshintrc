@@ -1,16 +1,22 @@
 {
   "camelcase": true,
   "curly": false,
+  "es3": true,
   "indent": 2,
   "latedef": true,
-  "quotmark": "single",
+  "quotmark": true,
   "strict": false,
   "trailing": true,
+  "expr": true,
   "node": true,
   "globals": {
     "requirejs": false,
     "require": false,
     "define": false,
+    "sinon": false,
+    "should": false,
+    "expect": false,
+    "assert": false,
     "Chart": false
   }
 }
