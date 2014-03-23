@@ -7,9 +7,9 @@ module.exports = function(config) {
       'sinon-chai'
     ],
     files: [
-      'dist/scripts/main.js',
-      {pattern: 'dist/**/*.js', included: false},
-      {pattern: 'test/**/*.js', included: false}
+      'src/scripts/main.js',
+      {pattern: 'src/**/*.js*', included: false},
+      {pattern: 'test/**/*.js*', included: false}
     ],
     reporters: [
       'progress'

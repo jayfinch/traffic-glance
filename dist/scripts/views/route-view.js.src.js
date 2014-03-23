@@ -1,9 +1,9 @@
-define(['require','backbone','q','q/queue','lodash','../templates/route','../models/traffic-model','./chart-view'],function(require) {
+define(['require','backbone','q','q/queue','lodash','dustc!../templates/route','../models/traffic-model','./chart-view'],function(require) {
   var Backbone = require('backbone');
   var Q = require('q');
   var Queue = require('q/queue');
   var _ = require('lodash');
-  var RouteTemplate = require('../templates/route');
+  var RouteTemplate = require('dustc!../templates/route');
   var TrafficModel = require('../models/traffic-model');
   var ChartView = require('./chart-view');
 

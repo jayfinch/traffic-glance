@@ -103,8 +103,7 @@ module.exports = function(grunt) {
     },
     watch: {
       options: {
-        interupt: true,
-        livereload: true
+        interupt: true
       },
       build: {
         files: 'src/**',
@@ -117,7 +116,6 @@ module.exports = function(grunt) {
       build: {
         options: {
           base: 'dist',
-          livereload: true,
           keepalive: true
         }
       }

@@ -3,7 +3,7 @@ define(function(require) {
   var Q = require('q');
   var Queue = require('q/queue');
   var _ = require('lodash');
-  var RouteTemplate = require('../templates/route');
+  var RouteTemplate = require('dustc!../templates/route');
   var TrafficModel = require('../models/traffic-model');
   var ChartView = require('./chart-view');
 

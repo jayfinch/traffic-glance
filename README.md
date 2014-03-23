@@ -1,7 +1,4 @@
-# TrafficGlance
-
-[![devDependency Status](https://david-dm.org/jayfinch/traffic-glance/dev-status.svg?theme=shields.io)](https://david-dm.org/jayfinch/traffic-glance#info=devDependencies) [![Build Status](https://travis-ci.org/jayfinch/traffic-glance.svg?branch=master)](https://travis-ci.org/jayfinch/traffic-glance)
-## About
+# TrafficGlance [![Build Status](https://travis-ci.org/jayfinch/traffic-glance.svg?branch=master)](https://travis-ci.org/jayfinch/traffic-glance)
 
 * Quickly see traffic conditions without all the clutter
 * Displays incident warnings if available

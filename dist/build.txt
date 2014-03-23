@@ -4,14 +4,17 @@ scripts/main.js
 scripts/libs/jquery/jquery.js
 scripts/libs/lodash/lodash.compat.js
 scripts/libs/backbone/backbone.js
+scripts/dustc.js
 scripts/libs/dustjs-linkedin/js/dust-core.js
 scripts/libs/dustjs-linkedin-helpers/js/dust-helpers.js
 scripts/libs/q/js/q.js
 scripts/templates/app.js
+dustc!templates/app
 scripts/models/config-model.js
 scripts/models/route-model.js
 scripts/util/queue.js
 scripts/templates/route.js
+dustc!templates/route
 scripts/libs/moment/moment.js
 scripts/models/traffic-model.js
 scripts/libs/chartjs/js/Chart.js

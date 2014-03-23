@@ -1,7 +1,7 @@
-define(['require','backbone','lodash','../templates/app','../models/config-model','../models/route-model','./route-view','moment'],function(require) {
+define(['require','backbone','lodash','dustc!../templates/app','../models/config-model','../models/route-model','./route-view','moment'],function(require) {
   var Backbone = require('backbone');
   var _ = require('lodash');
-  var AppTemplate = require('../templates/app');
+  var AppTemplate = require('dustc!../templates/app');
   var ConfigModel = require('../models/config-model');
   var RouteModel = require('../models/route-model');
   var RouteView = require('./route-view');
