@@ -37,7 +37,7 @@ Following the existing examples, modify the set of routes and make it your own. 
 
 Place the contents of `dist` on your web server. The app will work either at the root of your site or within a subfolder.
 
-## Advanced options
+## Advanced config options
 
 ### Auto load based on time of day
 
@@ -51,7 +51,7 @@ Specify a `startTime` and `endTime` in your routes. If it's currently within tha
 	}
 
 ### Units
-You may specify units as `mi` or `km`
+You may specify `units` as `mi` or `km`
 
 ## Developer guide
 
