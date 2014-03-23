@@ -1,11 +1,13 @@
 # TrafficGlance [![Build Status](https://travis-ci.org/jayfinch/traffic-glance.svg?branch=master)](https://travis-ci.org/jayfinch/traffic-glance)
 
-* Quickly see traffic conditions without all the clutter
+Quickly see traffic conditions without all the clutter. Customize it for yourself, host it how you'd like.
+
 * Displays incident warnings if available
 * Low barrier to entry:
 	* 100% client-side (HTML/Javascript)
+	* All customization done via a config file
 	* Just upload it to your server
-* Responsive layout
+* Responsive layout works for any device
 
 ## Getting Started
 
