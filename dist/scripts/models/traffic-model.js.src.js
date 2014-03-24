@@ -82,7 +82,6 @@ define(['require','backbone','lodash','../models/config-model','moment'],functio
 
                 // capture non-congestion warnings
                 totalWarnings = _.union(totalWarnings, [warning.text]);
-
               }
             });
           } else {
