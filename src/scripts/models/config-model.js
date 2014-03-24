@@ -6,7 +6,7 @@ define(function(require) {
   var ConfigModel = Backbone.Model.extend({
 
     defaults: {
-      key: '',
+      key: 'no-key-defined',
       units: 'mi',
       childViews: []
     },

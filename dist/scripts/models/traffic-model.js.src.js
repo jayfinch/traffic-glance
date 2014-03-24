@@ -81,7 +81,8 @@ define(['require','backbone','lodash','../models/config-model','moment'],functio
               } else if(_.contains(warningWhitelist, warning.warningType)){
 
                 // capture non-congestion warnings
-                totalWarnings.push(warning.text);
+                totalWarnings = _.union(totalWarnings, [warning.text]);
+
               }
             });
           } else {

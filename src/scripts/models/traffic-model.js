@@ -81,7 +81,7 @@ define(function(require) {
               } else if(_.contains(warningWhitelist, warning.warningType)){
 
                 // capture non-congestion warnings
-                totalWarnings.push(warning.text);
+                totalWarnings = _.union(totalWarnings, [warning.text]);
               }
             });
           } else {

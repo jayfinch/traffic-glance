@@ -9,14 +9,21 @@ module.exports = function(config) {
     files: [
       'src/scripts/main.js',
       {pattern: 'src/**/*.js*', included: false},
-      {pattern: 'test/**/*.js*', included: false}
+      {pattern: 'test/**/*.js*', included: false},
+      {pattern: 'test/**/*.coffee', included: false}
     ],
     reporters: [
       'progress',
       'coverage'
     ],
     preprocessors: {
-      'src/**/*.js': ['coverage']
+      'src/**/*.js': ['coverage'],
+      'test/**/*.coffee': ['coffee']
+    },
+    coffeePreprocessor: {
+      options: {
+        sourceMap: true
+      }
     },
     port: 9876,
     colors: true,

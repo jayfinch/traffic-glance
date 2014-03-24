@@ -17,10 +17,17 @@ define(['module'], function(module) {
           return;
         }
 
-        req(['text', 'dust-full', 'q'], function(text, dust, Q) {
+        var helper = dustc.helper || 'dust';
+        var useQHelper = helper === 'q';
+        var deps = ['text', 'dust-full'];
+
+        if(useQHelper) {
+          deps.push('q');
+        }
+
+        req(deps, function(text, dust, Q) {
           var url = dustc.url || config.baseUrl;
           var ext = dustc.ext || '.dust';
-          var helper = dustc.helper || 'dust';
           var file = name;
 
           var dustHelper = function(name) {
@@ -63,43 +70,47 @@ define(['module'], function(module) {
             };
           };
 
-          var qHelper = function(name) {
-            return {
-              render: function(context) {
-                if(!context) {
-                  context = {};
-                }
+          var qHelper;
 
-                return Q.nfcall(dust.render, name, context);
-              },
-
-              renderSync: function(context) {
-                if(!context) {
-                  context = {};
-                }
-
-                var output;
-
-                dust.render(name, context, function(error, html) {
-                  if(error) {
-                    throw error;
+          if(useQHelper) {
+            qHelper = function(name) {
+              return {
+                render: function(context) {
+                  if(!context) {
+                    context = {};
                   }
 
-                  output = html;
-                });
+                  return Q.nfcall(dust.render, name, context);
+                },
 
-                return output;
-              },
+                renderSync: function(context) {
+                  if(!context) {
+                    context = {};
+                  }
 
-              stream: function(context, callback) {
-                if(!context) {
-                  context = {};
+                  var output;
+
+                  dust.render(name, context, function(error, html) {
+                    if(error) {
+                      throw error;
+                    }
+
+                    output = html;
+                  });
+
+                  return output;
+                },
+
+                stream: function(context, callback) {
+                  if(!context) {
+                    context = {};
+                  }
+
+                  return Q.nfcall(dust.stream, name, context);
                 }
-
-                return Q.nfcall(dust.stream, name, context);
-              }
+              };
             };
-          };
+          }
 
           if(helper === 'dust') {
             helper = dustHelper;
@@ -126,9 +137,11 @@ define(['module'], function(module) {
     },
 
     write: function (pluginName, moduleName, write, config) {
-      var contents = 'define(["' + moduleName + '"], function(value) {' +
-                        'return value;' +
-                      '});';
+      var contents =
+        'define(["' + moduleName + '"], function(value) {' +
+          'return value;' +
+        '});';
+
       write.asModule(pluginName + '!' + moduleName, contents);
     }
   };
