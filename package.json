@@ -36,6 +36,7 @@
     "karma-phantomjs-launcher": "^0.x",
     "karma-mocha": "^0.x",
     "karma-sinon-chai": "^0.x",
-    "karma-coverage": "^0.x"
+    "karma-coverage": "^0.x",
+    "q": "^1.x"
   }
 }

@@ -23,6 +23,7 @@ require.config({
   },
   paths: {
     'text': './libs/requirejs-text/js/text',
+    'dustc': './libs/grunt-dustjs-linkedin/dustc',
     'jquery': './libs/jquery/jquery',
     'lodash': './libs/lodash/lodash.compat',
     'backbone': './libs/backbone/backbone',

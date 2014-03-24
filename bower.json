@@ -11,6 +11,7 @@
     "q": "^1.x",
     "requirejs": "^2.x",
     "requirejs-text": "^2.x",
+    "grunt-dustjs-linkedin": "^0.x",
     "chartjs": "*",
     "moment": "^2.x"
   },

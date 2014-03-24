@@ -113,7 +113,41 @@ module.exports = function(grunt) {
       }
     },
     connect: {
-      build: {
+      src: {
+        options: {
+          base: 'src',
+          keepalive: true,
+          middleware: function(connect, options, middlewares) {
+            middlewares.push(function(req, res, next) {
+              var less = require('grunt-contrib-less/node_modules/less');
+              var url = req.url;
+              var path = require('path');
+              var Q = require('q');
+              var fs = require('fs');
+              var masterConfig = grunt.config();
+              if(path.extname(url) !== masterConfig.less.build.ext) return next();
+              var baseDir = options.base[0];
+              var opts = grunt.config().less.options;
+              opts.paths = [path.join(baseDir, path.dirname(url))];
+              var parser = new less.Parser(opts);
+              var ext = path.extname(masterConfig.less.build.src);
+              Q.nfcall(fs.readFile, path.join(baseDir, url + ext), 'utf8')
+              .then(function(input) {
+                return Q.nfcall(parser.parse.bind(parser), input);
+              })
+              .then(function(tree) {
+                res.end(tree.toCSS(opts));
+              })
+              .fail(function(error) {
+                res.end(error);
+              })
+              .done();
+            });
+            return middlewares;
+          }
+        }
+      },
+      dist: {
         options: {
           base: 'dist',
           keepalive: true

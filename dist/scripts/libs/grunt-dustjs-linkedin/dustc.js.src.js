@@ -17,7 +17,7 @@ define(['module'], function(module) {
           return;
         }
 
-        var helper = dustc.helper || 'dust';
+        var helper = dustc.helper || false;
         var useQHelper = helper === 'q';
         var deps = ['text', 'dust-full'];
 
@@ -26,11 +26,12 @@ define(['module'], function(module) {
         }
 
         req(deps, function(text, dust, Q) {
-          var url = dustc.url || config.baseUrl;
-          var ext = dustc.ext || '.dust';
+          var url = dustc.url = dustc.url || config.baseUrl;
+          var ext = dustc.ext = dustc.ext || '.dust';
           var file = name;
 
-          var dustHelper = function(name) {
+          var dustHelper = function(data) {
+            var name = data.name;
             return {
               render: function(context, callback) {
                 if(!callback && typeof context === 'function') {
@@ -73,7 +74,8 @@ define(['module'], function(module) {
           var qHelper;
 
           if(useQHelper) {
-            qHelper = function(name) {
+            qHelper = function(data) {
+              var name = data.name;
               return {
                 render: function(context) {
                   if(!context) {
@@ -130,7 +132,10 @@ define(['module'], function(module) {
 
           text.get(req.toUrl(file), function(data) {
             dust.loadSource(dust.compile(data, name));
-            onload(helper(name));
+            if(helper === false) {
+              helper = function() { return {}; };
+            }
+            onload(helper({name: name}, dustc));
           });
         });
       }

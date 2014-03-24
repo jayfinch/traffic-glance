@@ -4,7 +4,7 @@ scripts/main.js
 scripts/libs/jquery/jquery.js
 scripts/libs/lodash/lodash.compat.js
 scripts/libs/backbone/backbone.js
-scripts/dustc.js
+scripts/libs/grunt-dustjs-linkedin/dustc.js
 scripts/libs/dustjs-linkedin/js/dust-core.js
 scripts/libs/dustjs-linkedin-helpers/js/dust-helpers.js
 scripts/libs/q/js/q.js
